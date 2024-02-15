@@ -1,6 +1,6 @@
 **Watchy**
 
-*Watchy app*, crafted by *Ahmed Guedmioui*, is a dynamic application designed with cutting-edge technologies, including *Jetpack Compose* and *Kotlin*. This project follows to clean code principles, thanks to the clarity and maintainability they bring. The application is built with the *Model-View-ViewModel (MVVM)* design pattern, which promotes a stable and scalable codebase. Additionally, *Dagger Hilt* is used for efficient dependency injection, which improves modularity and testability.
+*Watchy app*, made by *Ahmed Guedmioui*, is a dynamic application designed with cutting-edge technologies, including *Jetpack Compose* and *Kotlin*. This project follows to clean code principles, thanks to the clarity and maintainability they bring. The application is built with the *Model-View-ViewModel (MVVM)* design pattern, which promotes a stable and scalable codebase. Additionally, *Dagger Hilt* is used for efficient dependency injection, which improves modularity and testability. as well as authentication and user data are securely managed with a Ktor backend, which safely stores all user information in MongoDB Atlas, ensuring data integrity and confidentiality. Additionally, this data is efficiently synchronized with a local Room database, ensuring seamless access and consistent user experience across the application.
 
 ## About The App
 With this app you can get information about movies and TV series, watch trailer, search and find the latest, most popular and top rated movies and TV series.
@@ -14,6 +14,8 @@ With this app you can get information about movies and TV series, watch trailer,
 - **Retrofit:** Network calls are facilitated by *Retrofit*, enabling seamless communication with remote APIs.
 - **Room:** *Room* is used for local data storage, providing a reliable and efficient way to manage app-related data.
 - **Offline Capability:** This is a first offline app, ensuring users best possible experience even without an active internet connection.
+- **Authentication:** The use of JWT authentication provides a secure and efficient way to manage user authentication in the app, ensuring that only authorized users can access protected resources.
+- **Synchronization:** Seamlessly synchronized data (favorite and bookmarked movies and TV series) between local RoomDb and and remote MongoDb
 
 ## Getting Started
 
