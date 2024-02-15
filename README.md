@@ -31,6 +31,7 @@ Contributions are welcome! Whether you're fixing a bug, implementing a new featu
 Special thanks to the open-source community for their valuable contributions and support.
 
 ## Images From The App
+![main](https://github.com/ahmed-guedmioui-courses/Watchy/assets/59929234/993621f7-f094-423b-a43b-5343ea3c6eed)
 ![0](https://github.com/ahmed-guedmioui-courses/Watchy/assets/59929234/4968bd07-c272-46eb-be64-a544cc0e8ef1)
 ![1](https://github.com/ahmed-guedmioui-courses/Watchy/assets/59929234/953cb2d9-45fd-40b4-bffa-42908cf427c8)
 ![3](https://github.com/ahmed-guedmioui-courses/Watchy/assets/59929234/62708581-8807-47f8-acbb-6cc8030872b0)
@@ -38,3 +39,4 @@ Special thanks to the open-source community for their valuable contributions and
 ![6](https://github.com/ahmed-guedmioui-courses/Watchy/assets/59929234/d4bad4cc-75fa-4725-9488-295d5db98f5a)
 ![7](https://github.com/ahmed-guedmioui-courses/Watchy/assets/59929234/0c381595-6ece-4649-8dc1-d8f0306032d0)
 ![8](https://github.com/ahmed-guedmioui-courses/Watchy/assets/59929234/514309f3-bd2f-4ea9-850e-6481978daba6)
+
