@@ -1,0 +1,62 @@
+<resources>
+    <string name="app_name">Watchy</string>
+
+    <string name="name">Name</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="sign_in">Sign In</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="create_your_account">Create Your Account</string>
+    <string name="sign_in_to_your_account">Login To Your Account</string>
+    <string name="hide_password">Hide password</string>
+    <string name="show_password">Show password</string>
+    <string name="unknown_error_occurred">Unknown error occurred</string>
+    <string name="singed_out">Singed Out</string>
+    <string name="invalid_credentials">invalid credentials</string>
+    <string name="invalid_email_or_password">invalid email or password</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="don_t_have_an_account">Don\'t have an account?</string>
+
+    <string name="trending">Trending Now</string>
+    <string name="tv_series">TV Series</string>
+    <string name="special">Special ✨</string>
+    <string name="favorites">Favorites ❤️</string>
+    <string name="similar">Similar ✨</string>
+    <string name="see_all">See All</string>
+    <string name="search_for_a_movie_or_tv_series">Search a movie or tv series</string>
+    <string name="like">Like</string>
+    <string name="dislike">Dislike</string>
+    <string name="watch_trailer">Watch Trailer</string>
+    <string name="overview">Overview</string>
+    <string name="no_video_is_available_at_the_moment">No video is available at the moment 🥺</string>
+    <string name="similar_to">Similar to ✨ %1$s ✨</string>
+    <string name="something_went_wrong">Something went wrong</string>
+    <string name="couldnt_load_genres">Couldn\'t load genres</string>
+    <string name="couldnt_get_video_ids">Couldn\'t get video IDs</string>
+    <string name="couldnt_load_data">Couldn\'t load data</string>
+    <string name="couldnt_load_similar_media">Couldn\'t load similar media</string>
+    <string name="couldnt_load_details">Couldn\'t load details</string>
+    <string name="_18">+18</string>
+    <string name="_12">-12</string>
+    <string name="bookmark">Bookmark</string>
+    <string name="unbookmark">Unbookmark</string>
+    <string name="app_icon">App Icon</string>
+    <string name="remove_from_favorites">Remove from favorites?</string>
+    <string name="yes">Yes</string>
+    <string name="remove_from_bookmarks">Remove from bookmarks?</string>
+    <string name="cancel">Cancel</string>
+    <string name="hey">"Hey, %1$s "</string>
+    <string name="account_info">Account Info</string>
+    <string name="profile">Profile</string>
+    <string name="popular_movies">Popular Movies</string>
+    <string name="action_and_adventure">Action And Adventure</string>
+    <string name="drama">Drama</string>
+    <string name="comedy">Comedy</string>
+    <string name="sci_fi_and_fantasy">Sci-Fi And Fantasy</string>
+    <string name="animation">Animation</string>
+    <string name="categories">Categories</string>
+    <string name="favorites_and_bookmarks">Favorites And Bookmarks</string>
+    <string name="bookmarks">Bookmarks 🍿</string>
+
+</resources>
