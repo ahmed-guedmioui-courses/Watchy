@@ -1,6 +1,6 @@
-**The Movies Info**
+**Watchy**
 
-*The Movies Info app*, crafted by *Ahmed Guedmioui*, is a dynamic application designed with cutting-edge technologies, including *Jetpack Compose* and *Kotlin*. This project follows to clean code principles, thanks to the clarity and maintainability they bring. The application is built with the *Model-View-ViewModel (MVVM)* design pattern, which promotes a stable and scalable codebase. Additionally, *Dagger Hilt* is used for efficient dependency injection, which improves modularity and testability.
+*Watchy app*, crafted by *Ahmed Guedmioui*, is a dynamic application designed with cutting-edge technologies, including *Jetpack Compose* and *Kotlin*. This project follows to clean code principles, thanks to the clarity and maintainability they bring. The application is built with the *Model-View-ViewModel (MVVM)* design pattern, which promotes a stable and scalable codebase. Additionally, *Dagger Hilt* is used for efficient dependency injection, which improves modularity and testability.
 
 ## About The App
 With this app you can get information about movies and TV series, watch trailer, search and find the latest, most popular and top rated movies and TV series.
@@ -17,9 +17,9 @@ With this app you can get information about movies and TV series, watch trailer,
 
 ## Getting Started
 
-To explore and contribute to *The Movies Info* app, follow these steps:
+To explore and contribute to *Watchy* app, follow these steps:
 
-1. Clone the repository: `git clone https://github.com/ahmed-guedmioui/The-Movies-Info.git`
+1. Clone the repository: `git clone https://github.com/ahmed-guedmioui/Watchy.git`
 2. Build and run the project using your preferred IDE.
 3. Explore the codebase, contribute enhancements, and share your feedback.
 
