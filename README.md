@@ -36,8 +36,7 @@ Explore and contribute: Dive into the codebase, share your enhancements, and pro
 
 ## Images From The App
 ![main](https://github.com/ahmed-guedmioui-courses/Watchy/assets/59929234/993621f7-f094-423b-a43b-5343ea3c6eed)
-![0](https://github.com/ahmed-guedmioui-courses/Watchy/assets/59929234/4968bd07-c272-46eb-be64-a544cc0e8ef1)
-![1](https://github.com/ahmed-guedmioui-courses/Watchy/assets/59929234/953cb2d9-45fd-40b4-bffa-42908cf427c8)
+![0](https://github.com/ahmed-guedmioui-courses/Watchy/assets/59929234/4968bd07-c272-46eb-be64-a544cc0e8ef1) ![1](https://github.com/ahmed-guedmioui-courses/Watchy/assets/59929234/953cb2d9-45fd-40b4-bffa-42908cf427c8)
 ![3](https://github.com/ahmed-guedmioui-courses/Watchy/assets/59929234/62708581-8807-47f8-acbb-6cc8030872b0)
 ![4](https://github.com/ahmed-guedmioui-courses/Watchy/assets/59929234/0300c592-1b07-45e1-883e-89994c5e4798)
 ![6](https://github.com/ahmed-guedmioui-courses/Watchy/assets/59929234/d4bad4cc-75fa-4725-9488-295d5db98f5a)
