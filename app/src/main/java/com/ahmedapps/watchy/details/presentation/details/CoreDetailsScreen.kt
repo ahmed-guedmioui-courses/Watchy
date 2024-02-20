@@ -17,6 +17,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -72,12 +73,14 @@ import coil.request.ImageRequest
 import coil.size.Size
 import com.ahmedapps.watchy.R
 import com.ahmedapps.watchy.details.presentation.detail_ui_components.MovieImage
+import com.ahmedapps.watchy.details.presentation.similar.SimilarScreen
 import com.ahmedapps.watchy.details.presentation.watch_video.WatchVideoScreen
 import com.ahmedapps.watchy.main.data.remote.api.MediaApi
 import com.ahmedapps.watchy.main.domain.models.Media
 import com.ahmedapps.watchy.main.presentation.main.MainUiState
 import com.ahmedapps.watchy.ui.theme.SmallRadius
 import com.ahmedapps.watchy.ui.theme.font
+import com.ahmedapps.watchy.ui.ui_shared_components.MediaItemImage
 import com.ahmedapps.watchy.ui.ui_shared_components.RatingBar
 import com.ahmedapps.watchy.util.APIConstants
 import com.ahmedapps.watchy.util.Route
@@ -89,6 +92,7 @@ import kotlinx.coroutines.launch
 fun CoreDetailScreen(
     id: Int,
     mainUiState: MainUiState,
+    mainNavController: NavController
 ) {
 
     val detailsViewModel = hiltViewModel<DetailsViewModel>()
@@ -102,6 +106,8 @@ fun CoreDetailScreen(
     ) {
         composable(route = Route.DETAILS_SCREEN) {
             DetailScreen(
+                mainNavController = mainNavController,
+                detailsNavController = detailsNavController,
                 detailsScreenState = mediaDetailsScreenState,
                 onEvent = detailsViewModel::onEvent
             )
@@ -121,6 +127,23 @@ fun CoreDetailScreen(
                 videoId = videoId
             )
         }
+
+        composable(
+            "${Route.SIMILAR_SCREEN}?title={title}",
+            arguments = listOf(
+                navArgument("title") { type = NavType.StringType },
+            )
+        ) {
+
+            val name = it.arguments?.getString("title") ?: ""
+
+            SimilarScreen(
+                mainNavController = mainNavController,
+                detailsScreenState = mediaDetailsScreenState,
+                name = name,
+            )
+        }
+
     }
 
     LaunchedEffect(key1 = true) {
@@ -154,6 +177,8 @@ fun CoreDetailScreen(
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun DetailScreen(
+    mainNavController: NavController,
+    detailsNavController: NavController,
     detailsScreenState: DetailsScreenState,
     onEvent: (DetailsUiEvents) -> Unit
 ) {
@@ -233,6 +258,14 @@ fun DetailScreen(
                 Spacer(modifier = Modifier.height(16.dp))
 
                 OverviewSection(media = detailsScreenState.media)
+
+                SimilarMediaSection(
+                    mainNavController = mainNavController,
+                    detailsNavController = detailsNavController,
+                    media = detailsScreenState.media,
+                    detailsScreenState = detailsScreenState
+                )
+
 
                 Spacer(modifier = Modifier.height(100.dp))
 
@@ -500,6 +533,73 @@ fun OverviewSection(
         }
     }
 }
+
+
+@Composable
+fun SimilarMediaSection(
+    mainNavController: NavController,
+    detailsNavController: NavController,
+    media: Media,
+    detailsScreenState: DetailsScreenState,
+) {
+
+    val title = stringResource(id = R.string.similar)
+    val mediaList = detailsScreenState.similarList.take(10)
+
+    if (mediaList.isNotEmpty()) {
+        Column {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 22.dp, end = 22.dp, top = 22.dp, bottom = 10.dp),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = title,
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.onSurface,
+                    fontFamily = font,
+                    fontSize = 18.sp
+                )
+
+                Text(
+                    modifier = Modifier
+                        .alpha(0.85f)
+                        .clickable {
+                            detailsNavController.navigate(
+                                "${Route.SIMILAR_SCREEN}?title=${media.title}"
+                            )
+                        },
+                    text = stringResource(id = R.string.see_all),
+                    color = MaterialTheme.colorScheme.onSurface,
+                    fontFamily = font,
+                    fontSize = 14.sp,
+                )
+            }
+
+            LazyRow {
+                items(mediaList.size) {
+
+                    var paddingEnd = 0.dp
+                    if (it == mediaList.size - 1) {
+                        paddingEnd = 16.dp
+                    }
+
+                    MediaItemImage(
+                        media = mediaList[it],
+                        mainNavController = mainNavController,
+                        modifier = Modifier
+                            .height(200.dp)
+                            .width(150.dp)
+                            .padding(start = 16.dp, end = paddingEnd)
+                    )
+                }
+            }
+        }
+    }
+}
+
 
 @Composable
 fun FavoritesSection(

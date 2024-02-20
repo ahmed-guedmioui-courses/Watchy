@@ -24,6 +24,7 @@ object Route {
     const val CORE_DETAILS_SCREEN = "core_details_screen"
     const val DETAILS_SCREEN = "details_screen"
     const val WATCH_VIDEO_SCREEN = "watch_video_screen"
+    const val SIMILAR_SCREEN = "similar_screen"
 
     const val PROFILE_SCREEN = "profile_screen"
 

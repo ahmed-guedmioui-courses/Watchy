@@ -1,33 +1,42 @@
-**Watchy**
+# Watchy: Your Movie and TV Series Companion
 
-*Watchy app*, crafted by *Ahmed Guedmioui*, is a dynamic application designed with cutting-edge technologies, including *Jetpack Compose* and *Kotlin*. This project follows to clean code principles, thanks to the clarity and maintainability they bring. The application is built with the *Model-View-ViewModel (MVVM)* design pattern, which promotes a stable and scalable codebase. Additionally, *Dagger Hilt* is used for efficient dependency injection, which improves modularity and testability.
+ ## About the App
 
-## About The App
-With this app you can get information about movies and TV series, watch trailer, search and find the latest, most popular and top rated movies and TV series.
+ Watchy is a dynamic Android app, crafted with cutting-edge technologies like Jetpack Compose and Kotlin, delivering an immersive experience for movie and TV series enthusiasts. Developed by Ahmed Guedmioui, Watchy prioritizes clean code principles, secure user experience, and seamless functionality.
 
-## Key Features
+ ## About The App
+With this app you can get information about movies and TV series, watch trailer, search and find the latest, most popular and trending movies and TV series. You can also create your favorites and bookmarks list. As well as authentication and user data are securely managed with a Ktor backend, which safely stores all user information in MongoDB Atlas, ensuring data integrity and confidentiality. Additionally, this data is efficiently synchronized with a local Room database, ensuring seamless access and consistent user experience across the application.
 
-- **Jetpack Compose:** The app leverages *Jetpack Compose*, a modern Android UI toolkit, to create a seamless and interactive user experience.
-- **Kotlin:** Developed entirely in *Kotlin*, the codebase benefits from the conciseness and expressiveness of the language, promoting efficient and readable code.
-- **MVVM Design Pattern:** The application structure is organized following the *MVVM* design pattern, promoting separation of concerns and facilitating maintainability.
-- **Dagger Hilt:** Dependency injection is handled by *Dagger Hilt*, streamlining the management of dependencies and improving the overall architecture.
-- **Retrofit:** Network calls are facilitated by *Retrofit*, enabling seamless communication with remote APIs.
-- **Room:** *Room* is used for local data storage, providing a reliable and efficient way to manage app-related data.
-- **Offline Capability:** This is a first offline app, ensuring users best possible experience even without an active internet connection.
+ ## Key Features
 
-## Getting Started
+**Comprehensive Information:** Explore detailed movie and TV series data, including trailers, ratings, genres, and more.
+**Effortless Exploration:** Search and browse the latest, most popular, and trending content with ease.
+**Modern UI:** Jetpack Compose delivers a cutting-edge and interactive UI for smooth navigation.
+**API:** The app fetches all its data from themoviedb.org's API (https://developer.themoviedb.org/docs/getting-started)
+**Solid Architecture:** The MVVM design pattern promotes code clarity and maintainability, while Dagger Hilt streamlines dependency management.
+**Offline Availability:** Enjoy uninterrupted access to your favorites and bookmarks, even without an internet connection.
+**Secure Authentication:** JWT authentication ensures only authorized users have access, safeguarding your information.
+**Seamless Synchronization:** Local and remote data (favorites and bookmarks) are kept in sync for consistent experience across devices.
 
-To explore and contribute to *Watchy* app, follow these steps:
+ ## Getting Started
 
-1. Clone the repository: `git clone https://github.com/ahmed-guedmioui/Watchy.git`
-2. Build and run the project using your preferred IDE.
-3. Explore the codebase, contribute enhancements, and share your feedback.
+Clone the repository: git clone https://github.com/ahmed-guedmioui/Watchy.git
+Get an API key from themoviedb.org's API https://developer.themoviedb.org/docs/getting-started
+Put your API key in config.properties file
+Build and run the project: Use your Android Studio to bring Watchy to life.
+Explore and contribute: Dive into the codebase, share your enhancements, and provide feedback.
 
+ ## Contributions
 
-Contributions are welcome! Whether you're fixing a bug, implementing a new feature, or enhancing the documentation, your efforts are appreciated.
+ We welcome your contributions! Whether it's fixing a bug, adding a feature, or improving the documentation, your participation is valued. Join the community!
 
-## Acknowledgments
+ ## Community Appreciation
 
-Special thanks to the open-source community for their valuable contributions and support.
+ A heartfelt thank you to the open-source community for their invaluable contributions and support. Let's make Watchy the ultimate companion for movie and TV series enthusiasts!
 
 ## Images From The App
+![main](https://github.com/ahmed-guedmioui-courses/Watchy/assets/59929234/993621f7-f094-423b-a43b-5343ea3c6eed)
+![main 1 copy](https://github.com/ahmed-guedmioui-projects/Watchy/assets/59929234/4a52aa83-c9e8-4c2b-b6e9-c024b790af80)
+![main 2 copy](https://github.com/ahmed-guedmioui-projects/Watchy/assets/59929234/8ec0b956-a02b-4f42-b8d2-1345c4f38f57)
+![main 3 copy](https://github.com/ahmed-guedmioui-projects/Watchy/assets/59929234/5c59b40e-f3a3-44d5-b938-5746cb854a68)
+![main 4 copy](https://github.com/ahmed-guedmioui-projects/Watchy/assets/59929234/f719f633-6db4-4ecb-a2ff-29b4591f0bd9)

@@ -16,6 +16,8 @@ data class DetailsScreenState(
     val moviesGenresList: List<Genre> = emptyList(),
     val tvGenresList: List<Genre> = emptyList(),
 
+    val similarList: List<Media> = emptyList(),
+
     val showAlertDialog: Boolean = false,
     val alertDialogType: Int = 0
 )

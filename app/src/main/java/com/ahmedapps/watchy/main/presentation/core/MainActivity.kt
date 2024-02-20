@@ -226,7 +226,8 @@ class MainActivity : ComponentActivity() {
                 val id = it.arguments?.getInt("id") ?: 0
                 CoreDetailScreen(
                     id = id,
-                    mainUiState = mainUiState
+                    mainUiState = mainUiState,
+                    mainNavController = mainNavController
                 )
             }
         }

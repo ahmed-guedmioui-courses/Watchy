@@ -169,6 +169,7 @@ fun FavoritesScreen(
                                 bottom = 12.dp
                             )
                             .clip(RoundedCornerShape(MediumRadius))
+                            .background(MaterialTheme.colorScheme.inverseOnSurface)
                             .align(Alignment.CenterHorizontally)
                     )
                 } else {
@@ -202,6 +203,7 @@ fun FavoritesScreen(
                                 bottom = 12.dp
                             )
                             .clip(RoundedCornerShape(MediumRadius))
+                            .background(MaterialTheme.colorScheme.inverseOnSurface)
                             .align(Alignment.CenterHorizontally)
                     )
                 } else {
