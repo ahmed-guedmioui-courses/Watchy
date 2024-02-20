@@ -82,9 +82,8 @@ import com.ahmedapps.watchy.ui.theme.SmallRadius
 import com.ahmedapps.watchy.ui.theme.font
 import com.ahmedapps.watchy.ui.ui_shared_components.MediaItemImage
 import com.ahmedapps.watchy.ui.ui_shared_components.RatingBar
-import com.ahmedapps.watchy.util.APIConstants
 import com.ahmedapps.watchy.util.Route
-import com.ahmedapps.watchy.util.genresProvider
+import com.ahmedapps.watchy.main.domain.usecase.genreListToString
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -390,10 +389,8 @@ fun InfoSection(
         mutableStateOf("")
     }
     LaunchedEffect(media) {
-        genres = genresProvider(
-            genreIds = media.genreIds,
-            allGenres = if (media.mediaType == APIConstants.MOVIE) detailsScreenState.moviesGenresList
-            else detailsScreenState.tvGenresList
+        genres = genreListToString(
+            genres = media.genres, type = media.mediaType
         )
     }
 

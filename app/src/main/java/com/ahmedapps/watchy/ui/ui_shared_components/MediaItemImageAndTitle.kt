@@ -52,9 +52,8 @@ import com.ahmedapps.watchy.main.presentation.main.MainUiState
 import com.ahmedapps.watchy.ui.theme.Radius
 import com.ahmedapps.watchy.ui.theme.RadiusContainer
 import com.ahmedapps.watchy.ui.theme.font
-import com.ahmedapps.watchy.util.APIConstants
 import com.ahmedapps.watchy.util.Route
-import com.ahmedapps.watchy.util.genresProvider
+import com.ahmedapps.watchy.main.domain.usecase.genreListToString
 
 @Composable
 fun MediaItemImageAndTitle(
@@ -192,11 +191,8 @@ fun MediaItemImageAndTitle(
                 mutableStateOf("")
             }
             LaunchedEffect(media) {
-               genres = genresProvider(
-                    genreIds = media.genreIds,
-                    allGenres = if (media.mediaType == APIConstants.MOVIE)
-                        mainUiState.moviesGenresList
-                    else mainUiState.tvGenresList
+               genres = genreListToString(
+                   genres = media.genres, type = media.mediaType
                 )
             }
 

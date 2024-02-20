@@ -21,8 +21,8 @@ fun FavoriteMediaEntity.toMedia(): Media {
         voteAverage = voteAverage,
         popularity = popularity,
         voteCount = voteCount,
-        genreIds = try {
-            genreIds.split(",").map { it.toInt() }
+        genres = try {
+            genres.split(",").map { it }
         } catch (e: Exception) {
             emptyList()
         },
@@ -69,7 +69,7 @@ fun FavoriteMediaEntity.toMediaRequest(): MediaRequest {
         voteAverage = voteAverage,
         popularity = popularity,
         voteCount = voteCount,
-        genreIds = genreIds,
+        genres = genres,
         adult = adult,
         mediaType = mediaType,
         originCountry = originCountry,
@@ -107,7 +107,7 @@ fun BackendMediaDto.toFavoriteMediaEntity(): FavoriteMediaEntity {
         voteAverage = voteAverage,
         popularity = popularity,
         voteCount = voteCount,
-        genreIds = genreIds,
+        genres = genres,
         adult = adult,
         mediaType = mediaType,
         originCountry = originCountry,
@@ -145,8 +145,8 @@ fun Media.toFavoriteMediaEntity(): FavoriteMediaEntity {
         voteAverage = voteAverage,
         popularity = popularity,
         voteCount = voteCount,
-        genreIds = try {
-            genreIds.joinToString(",")
+        genres = try {
+            genres.joinToString(",")
         } catch (e: Exception) {
             ""
         },
@@ -197,8 +197,8 @@ fun BackendMediaDto.toMedia(): Media {
         voteAverage = voteAverage,
         popularity = popularity,
         voteCount = voteCount,
-        genreIds = try {
-            genreIds.split(",").map { it.toInt() }
+        genres = try {
+            genres.split(",").map { it }
         } catch (e: Exception) {
             emptyList()
         },
@@ -246,8 +246,8 @@ fun Media.toMediaRequest(): MediaRequest {
         voteAverage = voteAverage,
         popularity = popularity,
         voteCount = voteCount,
-        genreIds = try {
-            genreIds.joinToString(",")
+        genres = try {
+            genres.joinToString(",")
         } catch (e: Exception) {
             ""
         },

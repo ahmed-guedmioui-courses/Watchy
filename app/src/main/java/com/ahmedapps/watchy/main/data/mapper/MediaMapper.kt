@@ -3,6 +3,7 @@ package com.ahmedapps.watchy.main.data.mapper
 import com.ahmedapps.watchy.main.data.local.media.MediaEntity
 import com.ahmedapps.watchy.main.data.remote.dto.MediaDto
 import com.ahmedapps.watchy.main.domain.models.Media
+import com.ahmedapps.watchy.main.domain.usecase.provideGenres
 
 fun MediaEntity.toMedia(): Media {
     return Media(
@@ -12,7 +13,7 @@ fun MediaEntity.toMedia(): Media {
         isBookmarked = isBookmarked,
 
         backdropPath = backdropPath,
-        originalLanguage = originalLanguage ?: "",
+        originalLanguage = originalLanguage,
         overview = overview,
         posterPath = posterPath,
         releaseDate = releaseDate,
@@ -20,8 +21,8 @@ fun MediaEntity.toMedia(): Media {
         voteAverage = voteAverage,
         popularity = popularity,
         voteCount = voteCount,
-        genreIds = try {
-            genreIds.split(",").map { it.toInt() }
+        genres = try {
+            genres.split(",").map { it }
         } catch (e: Exception) {
             emptyList()
         },
@@ -83,10 +84,16 @@ fun MediaDto.toMediaEntity(
         voteAverage = vote_average ?: 0.0,
         popularity = popularity ?: 0.0,
         voteCount = vote_count ?: 0,
-        genreIds = try {
-            genre_ids?.joinToString(",") ?: ""
-        } catch (e: Exception) {
+        genres = if (genre_ids?.isEmpty() == true) {
             ""
+        } else {
+            try {
+                provideGenres(
+                    type, genre_ids ?: emptyList()
+                ).joinToString(",")
+            } catch (e: Exception) {
+                ""
+            }
         },
         adult = adult ?: false,
         mediaType = type,
@@ -125,8 +132,8 @@ fun Media.toMediaEntity(): MediaEntity {
         voteAverage = voteAverage,
         popularity = popularity,
         voteCount = voteCount,
-        genreIds = try {
-            genreIds.joinToString(",")
+        genres = try {
+            genres.joinToString(",")
         } catch (e: Exception) {
             ""
         },
@@ -183,7 +190,17 @@ fun MediaDto.toMedia(
         voteAverage = vote_average ?: 0.0,
         popularity = popularity ?: 0.0,
         voteCount = vote_count ?: 0,
-        genreIds = genre_ids ?: emptyList(),
+        genres = if (genre_ids?.isEmpty() == true) {
+            emptyList()
+        } else {
+            try {
+                provideGenres(
+                    type, genre_ids ?: emptyList()
+                )
+            } catch (e: Exception) {
+                emptyList()
+            }
+        },
         adult = adult ?: false,
         mediaType = type,
         category = category,

@@ -6,7 +6,6 @@ import com.ahmedapps.watchy.auth.domain.model.AuthRequest
 import com.ahmedapps.watchy.auth.domain.repository.AuthRepository
 import com.ahmedapps.watchy.auth.util.AuthResult
 import com.ahmedapps.watchy.favorites.domain.repository.FavoritesRepository
-import com.ahmedapps.watchy.main.domain.repository.GenreRepository
 import com.ahmedapps.watchy.main.domain.repository.MainRepository
 import retrofit2.HttpException
 import javax.inject.Inject
@@ -15,7 +14,6 @@ class AuthRepositoryImpl @Inject constructor(
     private val authApi: AuthApi,
     private val mainRepository: MainRepository,
     private val favoritesRepository: FavoritesRepository,
-    private val genreRepository: GenreRepository,
     private val prefs: SharedPreferences
 ) : AuthRepository {
 
@@ -111,7 +109,6 @@ class AuthRepositoryImpl @Inject constructor(
         prefs.edit().putString("name", null).apply()
 
         mainRepository.clearMediaDb()
-        genreRepository.clearGenresDb()
         favoritesRepository.clearFavoritesDb()
 
         return AuthResult.SingedOut()

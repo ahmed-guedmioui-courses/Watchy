@@ -1,8 +1,6 @@
 package com.ahmedapps.watchy.main.di
 
-import com.ahmedapps.watchy.main.data.repository.GenreRepositoryImpl
 import com.ahmedapps.watchy.main.data.repository.MainRepositoryImpl
-import com.ahmedapps.watchy.main.domain.repository.GenreRepository
 import com.ahmedapps.watchy.main.domain.repository.MainRepository
 import dagger.Binds
 import dagger.Module
@@ -19,11 +17,5 @@ abstract class MainRepositoryModule {
     abstract fun bindMainRepository(
         mediaRepositoryImpl: MainRepositoryImpl
     ): MainRepository
-
-    @Binds
-    @Singleton
-    abstract fun bindGenreRepository(
-        genreRepositoryImpl: GenreRepositoryImpl
-    ): GenreRepository
 
 }

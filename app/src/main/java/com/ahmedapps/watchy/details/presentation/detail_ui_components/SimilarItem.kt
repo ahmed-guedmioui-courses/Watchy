@@ -49,11 +49,10 @@ import coil.size.Size
 import com.ahmedapps.watchy.details.presentation.details.DetailsScreenState
 import com.ahmedapps.watchy.main.data.remote.api.MediaApi
 import com.ahmedapps.watchy.main.domain.models.Media
-import com.ahmedapps.watchy.util.genresProvider
+import com.ahmedapps.watchy.main.domain.usecase.genreListToString
 import com.ahmedapps.watchy.ui.theme.Radius
 import com.ahmedapps.watchy.ui.theme.RadiusContainer
 import com.ahmedapps.watchy.ui.theme.font
-import com.ahmedapps.watchy.util.APIConstants
 import com.ahmedapps.watchy.util.Route
 import com.ahmedapps.watchy.ui.ui_shared_components.RatingBar
 import com.ahmedapps.watchy.ui.ui_shared_components.getAverageColor
@@ -194,11 +193,8 @@ fun SimilarItem(
                 mutableStateOf("")
             }
             LaunchedEffect(media) {
-                genres = genresProvider(
-                    genreIds = media.genreIds,
-                    allGenres = if (media.mediaType == APIConstants.MOVIE)
-                        detailsScreenState.moviesGenresList
-                    else detailsScreenState.tvGenresList
+                genres = genreListToString(
+                    genres = media.genres, type = media.mediaType
                 )
             }
 

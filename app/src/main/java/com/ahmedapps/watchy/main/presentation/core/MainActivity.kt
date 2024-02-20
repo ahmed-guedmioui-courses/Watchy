@@ -211,8 +211,7 @@ class MainActivity : ComponentActivity() {
 
             composable(Route.SEARCH_SCREEN) {
                 SearchScreen(
-                    mainNavController = mainNavController,
-                    mainUiState = mainUiState,
+                    mainNavController = mainNavController
                 )
             }
 

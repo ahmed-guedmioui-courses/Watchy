@@ -19,16 +19,18 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.ahmedapps.watchy.main.presentation.main.MainUiState
 import com.ahmedapps.watchy.search.presentation.searchScreenUiComponents.SearchMediaItem
 import com.ahmedapps.watchy.ui.theme.BigRadius
 import com.ahmedapps.watchy.ui.ui_shared_components.FocusedTopBar
+import com.ahmedapps.watchy.util.APIConstants
+import com.ahmedapps.watchy.util.Route
+import kotlinx.coroutines.flow.collectLatest
+import timber.log.Timber
 import kotlin.math.roundToInt
 
 @Composable
 fun SearchScreen(
-    mainNavController: NavController,
-    mainUiState: MainUiState,
+    mainNavController: NavController
 ) {
 
     val searchViewModel = hiltViewModel<SearchViewModel>()
@@ -47,6 +49,14 @@ fun SearchScreen(
         }
     }
 
+    LaunchedEffect(searchViewModel.navigateToDetailsChannel) {
+        searchViewModel.navigateToDetailsChannel.collectLatest { mediaId ->
+            mainNavController.navigate(
+                "${Route.CORE_DETAILS_SCREEN}?id=$mediaId"
+            )
+        }
+    }
+
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -62,7 +72,6 @@ fun SearchScreen(
                 SearchMediaItem(
                     media = searchScreenState.searchList[index],
                     mainNavController = mainNavController,
-                    mainUiState = mainUiState,
                     onEvent = searchViewModel::onEvent
                 )
 

@@ -12,7 +12,7 @@ data class Media(
 
     val adult: Boolean,
     val backdropPath: String,
-    val genreIds: List<Int>,
+    val genres: List<String>,
     val mediaType: String,
     val originCountry: List<String>,
     val originalLanguage: String,
