@@ -1,4 +1,4 @@
-package com.ahmedapps.watchy.details.presentation.detail_ui_components
+package com.ahmedapps.watchy.categories.presentaion.category_list
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -46,22 +46,20 @@ import coil.compose.AsyncImagePainter
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import coil.size.Size
-import com.ahmedapps.watchy.details.presentation.details.DetailsScreenState
 import com.ahmedapps.watchy.main.data.remote.api.MediaApi
 import com.ahmedapps.watchy.main.domain.models.Media
 import com.ahmedapps.watchy.main.domain.usecase.genreListToString
 import com.ahmedapps.watchy.ui.theme.Radius
 import com.ahmedapps.watchy.ui.theme.RadiusContainer
 import com.ahmedapps.watchy.ui.theme.font
-import com.ahmedapps.watchy.util.Route
 import com.ahmedapps.watchy.ui.ui_shared_components.RatingBar
 import com.ahmedapps.watchy.ui.ui_shared_components.getAverageColor
+import com.ahmedapps.watchy.util.Route
 
 @Composable
-fun SimilarItem(
+fun CategoryMediaItem(
     media: Media,
     mainNavController: NavController,
-    detailsScreenState: DetailsScreenState,
     modifier: Modifier = Modifier
 ) {
 
@@ -188,11 +186,8 @@ fun SimilarItem(
                     }
                 },
             )
-
-            var genres by remember {
-                mutableStateOf("")
-            }
-            LaunchedEffect(media) {
+            var genres = ""
+            LaunchedEffect(key1 = true) {
                 genres = genreListToString(
                     genresNames = media.genres
                 )
@@ -200,7 +195,9 @@ fun SimilarItem(
 
             Text(
                 modifier = Modifier
-                    .padding(horizontal = 12.dp),
+                    .padding(
+                        horizontal = 12.dp
+                    ),
                 text = genres,
                 fontFamily = font,
                 fontSize = 12.5.sp,

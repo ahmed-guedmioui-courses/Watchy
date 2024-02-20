@@ -77,13 +77,13 @@ import com.ahmedapps.watchy.details.presentation.similar.SimilarScreen
 import com.ahmedapps.watchy.details.presentation.watch_video.WatchVideoScreen
 import com.ahmedapps.watchy.main.data.remote.api.MediaApi
 import com.ahmedapps.watchy.main.domain.models.Media
+import com.ahmedapps.watchy.main.domain.usecase.genreListToString
 import com.ahmedapps.watchy.main.presentation.main.MainUiState
 import com.ahmedapps.watchy.ui.theme.SmallRadius
 import com.ahmedapps.watchy.ui.theme.font
 import com.ahmedapps.watchy.ui.ui_shared_components.MediaItemImage
 import com.ahmedapps.watchy.ui.ui_shared_components.RatingBar
 import com.ahmedapps.watchy.util.Route
-import com.ahmedapps.watchy.main.domain.usecase.genreListToString
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -390,7 +390,7 @@ fun InfoSection(
     }
     LaunchedEffect(media) {
         genres = genreListToString(
-            genres = media.genres, type = media.mediaType
+            genresNames = media.genres
         )
     }
 

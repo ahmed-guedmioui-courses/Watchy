@@ -89,7 +89,7 @@ fun MediaDto.toMediaEntity(
         } else {
             try {
                 provideGenres(
-                    type, genre_ids ?: emptyList()
+                  genre_ids ?: emptyList()
                 ).joinToString(",")
             } catch (e: Exception) {
                 ""
@@ -195,7 +195,7 @@ fun MediaDto.toMedia(
         } else {
             try {
                 provideGenres(
-                    type, genre_ids ?: emptyList()
+                   genre_ids ?: emptyList()
                 )
             } catch (e: Exception) {
                 emptyList()

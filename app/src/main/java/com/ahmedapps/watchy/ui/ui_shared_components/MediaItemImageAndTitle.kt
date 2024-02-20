@@ -48,12 +48,12 @@ import coil.request.ImageRequest
 import coil.size.Size
 import com.ahmedapps.watchy.main.data.remote.api.MediaApi.Companion.IMAGE_BASE_URL
 import com.ahmedapps.watchy.main.domain.models.Media
+import com.ahmedapps.watchy.main.domain.usecase.genreListToString
 import com.ahmedapps.watchy.main.presentation.main.MainUiState
 import com.ahmedapps.watchy.ui.theme.Radius
 import com.ahmedapps.watchy.ui.theme.RadiusContainer
 import com.ahmedapps.watchy.ui.theme.font
 import com.ahmedapps.watchy.util.Route
-import com.ahmedapps.watchy.main.domain.usecase.genreListToString
 
 @Composable
 fun MediaItemImageAndTitle(
@@ -192,8 +192,8 @@ fun MediaItemImageAndTitle(
             }
             LaunchedEffect(media) {
                genres = genreListToString(
-                   genres = media.genres, type = media.mediaType
-                )
+                   genresNames = media.genres
+               )
             }
 
             Text(

@@ -194,7 +194,7 @@ fun FavoriteMediaItem(
             }
             LaunchedEffect(media) {
                 genres = genreListToString(
-                    genres = media.genres, type = media.mediaType
+                    genresNames = media.genres
                 )
             }
 

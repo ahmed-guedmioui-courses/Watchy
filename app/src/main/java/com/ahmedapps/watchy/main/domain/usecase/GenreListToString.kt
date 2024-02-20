@@ -1,18 +1,13 @@
 package com.ahmedapps.watchy.main.domain.usecase
 
-import com.ahmedapps.watchy.util.APIConstants.MOVIE
-import com.ahmedapps.watchy.util.Constants.movieGenres
-import com.ahmedapps.watchy.util.Constants.tvSeriesGenres
-
-fun genreListToString(
-    genres: List<String>,
-    type: String
+import com.ahmedapps.watchy.util.Constants.genres
+ fun genreListToString(
+    genresNames: List<String>
 ): String {
 
-    val genresList = if (type == MOVIE) movieGenres else tvSeriesGenres
 
-    return genres.mapNotNull { name ->
-        genresList.find { genre ->
+    return genresNames.mapNotNull { name ->
+        genres.find { genre ->
             genre.name == name
         }?.name
     }.joinToString(" - ")

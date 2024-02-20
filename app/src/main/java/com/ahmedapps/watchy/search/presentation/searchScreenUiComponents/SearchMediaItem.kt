@@ -49,12 +49,12 @@ import coil.size.Size
 import com.ahmedapps.watchy.ui.ui_shared_components.getAverageColor
 import com.ahmedapps.watchy.main.data.remote.api.MediaApi.Companion.IMAGE_BASE_URL
 import com.ahmedapps.watchy.main.domain.models.Media
+import com.ahmedapps.watchy.main.domain.usecase.genreListToString
 import com.ahmedapps.watchy.search.presentation.SearchUiEvents
 import com.ahmedapps.watchy.ui.theme.Radius
 import com.ahmedapps.watchy.ui.theme.RadiusContainer
 import com.ahmedapps.watchy.ui.theme.font
 import com.ahmedapps.watchy.ui.ui_shared_components.RatingBar
-import com.ahmedapps.watchy.main.domain.usecase.genreListToString
 
 @Composable
 fun SearchMediaItem(
@@ -191,7 +191,7 @@ fun SearchMediaItem(
             }
             LaunchedEffect(media) {
                 genres = genreListToString(
-                    genres = media.genres, type = media.mediaType
+                    genresNames = media.genres
                 )
             }
 
