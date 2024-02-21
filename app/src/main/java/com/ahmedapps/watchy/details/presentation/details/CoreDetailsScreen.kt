@@ -296,7 +296,7 @@ fun VideoSection(
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .height(250.dp)
+            .height(220.dp)
             .clickable {
                 onEvent(DetailsUiEvents.NavigateToWatchVideo)
             },
@@ -397,7 +397,7 @@ fun InfoSection(
     Column(
         modifier = Modifier.padding(end = 8.dp)
     ) {
-        Spacer(modifier = Modifier.height(260.dp))
+        Spacer(modifier = Modifier.height(230.dp))
 
         Text(
             text = media.title,
@@ -433,18 +433,6 @@ fun InfoSection(
 
         Spacer(modifier = Modifier.height(7.dp))
 
-        if (media.releaseDate.isNotEmpty()) {
-            Text(
-                text = media.releaseDate.take(4),
-                color = MaterialTheme.colorScheme.onSurface,
-                fontFamily = font,
-                fontSize = 15.sp
-            )
-            Spacer(modifier = Modifier.width(8.dp))
-        }
-
-        Spacer(modifier = Modifier.height(7.dp))
-
         Text(
             modifier = Modifier
                 .border(
@@ -459,6 +447,18 @@ fun InfoSection(
             fontFamily = font,
             fontSize = 12.sp
         )
+
+        Spacer(modifier = Modifier.height(7.dp))
+
+        if (media.releaseDate.isNotEmpty()) {
+            Text(
+                text = media.releaseDate.take(4),
+                color = MaterialTheme.colorScheme.onSurface,
+                fontFamily = font,
+                fontSize = 15.sp
+            )
+            Spacer(modifier = Modifier.width(8.dp))
+        }
 
         Spacer(modifier = Modifier.height(7.dp))
 

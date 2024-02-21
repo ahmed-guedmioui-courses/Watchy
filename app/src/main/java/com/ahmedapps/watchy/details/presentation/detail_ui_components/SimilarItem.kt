@@ -119,12 +119,10 @@ fun SimilarItem(
                 if (imageState is AsyncImagePainter.State.Success) {
 
                     val imageBitmap = imageState.result.drawable.toBitmap()
-
-
                     dominantColor = getAverageColor(imageBitmap.asImageBitmap())
 
                     Image(
-                        bitmap = imageBitmap.asImageBitmap(),
+                        painter = imageState.painter,
                         contentDescription = title,
                         contentScale = ContentScale.Crop,
                         modifier = Modifier

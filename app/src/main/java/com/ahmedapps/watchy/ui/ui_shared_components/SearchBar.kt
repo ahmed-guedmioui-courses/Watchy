@@ -195,5 +195,25 @@ fun NonFocusedSearchBar(
                 }
             }
         }
+        
+        Spacer(modifier = Modifier.width(8.dp))
+
+        Box(
+            modifier = Modifier
+                .size(47.dp)
+                .clip(CircleShape)
+                .background(MaterialTheme.colorScheme.secondaryContainer)
+                .clickable {
+                    mainNavController.navigate(Route.CORE_FAVORITES_SCREEN)
+                }
+        ) {
+            androidx.compose.material3.Icon(
+                modifier = Modifier
+                    .align(Alignment.Center),
+                imageVector = Icons.Rounded.Bookmarks,
+                contentDescription = stringResource(R.string.favorites_and_bookmarks),
+                tint = MaterialTheme.colorScheme.primary
+            )
+        }
     }
 }

@@ -191,41 +191,13 @@ fun MainScreen(
             )
         }
 
-        Row(
-            modifier = Modifier
-                .fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Box(modifier = Modifier.weight(1f)) {
-                NonFocusedTopBar(
-                    isMainScreen = true,
-                    name = mainUiState.name.take(1),
-                    toolbarOffsetHeightPx = toolbarOffsetHeightPx.floatValue.roundToInt(),
-                    mainNavController = mainNavController,
-                )
-            }
+        NonFocusedTopBar(
+            isMainScreen = true,
+            name = mainUiState.name.take(1),
+            toolbarOffsetHeightPx = toolbarOffsetHeightPx.floatValue.roundToInt(),
+            mainNavController = mainNavController,
+        )
 
-            Box(
-                modifier = Modifier
-                    .size(47.dp)
-                    .clip(CircleShape)
-                    .background(MaterialTheme.colorScheme.secondaryContainer)
-                    .clickable {
-                        mainNavController.navigate(Route.CORE_FAVORITES_SCREEN)
-                    }
-            ) {
-                Icon(
-                    modifier = Modifier
-                        .align(Center),
-                    imageVector = Icons.Rounded.Bookmarks,
-                    contentDescription = stringResource(R.string.favorites_and_bookmarks),
-                    tint = MaterialTheme.colorScheme.primary
-                )
-            }
-
-            Spacer(modifier = Modifier.width(16.dp))
-
-        }
     }
 }
 

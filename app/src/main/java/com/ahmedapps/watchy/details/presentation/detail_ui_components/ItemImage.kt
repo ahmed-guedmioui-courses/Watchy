@@ -33,11 +33,10 @@ fun MovieImage(
     if (imageState is AsyncImagePainter.State.Success) {
 
         val imageBitmap = imageState.result.drawable.toBitmap()
-
         onImageFinished(getAverageColor(imageBitmap.asImageBitmap()))
 
         Image(
-            bitmap = imageBitmap.asImageBitmap(),
+            painter = imageState.painter,
             contentDescription = description,
             contentScale = ContentScale.Crop,
             modifier = Modifier
