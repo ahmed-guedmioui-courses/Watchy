@@ -136,7 +136,7 @@ fun SignUpScreen(
                 signUpViewModel.onEvent(SignUpUiEvent.SignUpNameChanged(it))
             },
             modifier = Modifier.fillMaxWidth(),
-            placeholder = {
+            label = {
                 Text(
                     text = stringResource(R.string.name),
                     fontFamily = font
@@ -156,7 +156,7 @@ fun SignUpScreen(
                 signUpViewModel.onEvent(SignUpUiEvent.SignUpEmailChanged(it))
             },
             modifier = Modifier.fillMaxWidth(),
-            placeholder = {
+            label = {
                 Text(
                     text = stringResource(com.ahmedapps.watchy.R.string.email),
                     fontFamily = font
@@ -166,7 +166,8 @@ fun SignUpScreen(
                 fontFamily = font,
                 fontSize = 15.sp
             ),
-            maxLines = 1
+            maxLines = 1,
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email)
         )
         Spacer(modifier = Modifier.height(16.dp))
 
@@ -180,7 +181,7 @@ fun SignUpScreen(
                 signUpViewModel.onEvent(SignUpUiEvent.SignUpPasswordChanged(it))
             },
             modifier = Modifier.fillMaxWidth(),
-            placeholder = {
+            label = {
                 Text(
                     text = stringResource(com.ahmedapps.watchy.R.string.password),
                     fontFamily = font

@@ -144,7 +144,7 @@ fun SignInScreen(
                 signInViewModel.onEvent(SignInUiEvent.SignInEmailChanged(it))
             },
             modifier = Modifier.fillMaxWidth(),
-            placeholder = {
+            label = {
                 Text(
                     text = stringResource(com.ahmedapps.watchy.R.string.email),
                     fontFamily = font
@@ -154,7 +154,8 @@ fun SignInScreen(
                 fontFamily = font,
                 fontSize = 15.sp
             ),
-            maxLines = 1
+            maxLines = 1,
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email)
         )
         Spacer(modifier = Modifier.height(16.dp))
 
@@ -168,7 +169,7 @@ fun SignInScreen(
                 signInViewModel.onEvent(SignInUiEvent.SignInPasswordChanged(it))
             },
             modifier = Modifier.fillMaxWidth(),
-            placeholder = {
+            label = {
                 Text(
                     text = stringResource(com.ahmedapps.watchy.R.string.password),
                     fontFamily = font

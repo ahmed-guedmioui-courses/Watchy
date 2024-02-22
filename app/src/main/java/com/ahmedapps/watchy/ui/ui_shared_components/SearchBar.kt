@@ -52,14 +52,16 @@ import com.ahmedapps.watchy.util.Route
 @Composable
 fun SearchBar(
     modifier: Modifier = Modifier,
-    leadingIcon: (@Composable () -> Unit)? = null,
-    placeholderText: String = "Placeholder",
     searchScreenState: SearchScreenState,
     onSearch: (String) -> Unit = {}
 ) {
-    var text by rememberSaveable { mutableStateOf(searchScreenState.searchQuery) }
+    var text by rememberSaveable {
+        mutableStateOf(searchScreenState.searchQuery)
+    }
 
-    val focusRequester = remember { FocusRequester() }
+    val focusRequester = remember {
+        FocusRequester()
+    }
     LaunchedEffect(focusRequester) {
         focusRequester.requestFocus()
     }
@@ -73,10 +75,7 @@ fun SearchBar(
         BasicTextField(
             modifier = modifier
                 .clip(RoundedCornerShape(percent = 50))
-                .background(
-                    MaterialTheme.colorScheme.secondaryContainer,
-                    MaterialTheme.shapes.small,
-                )
+                .background(MaterialTheme.colorScheme.secondaryContainer)
                 .fillMaxWidth()
                 .focusRequester(focusRequester),
             value = text,
@@ -93,24 +92,34 @@ fun SearchBar(
             ),
             decorationBox = { innerTextField ->
                 Row(
-                    modifier,
+                    modifier = modifier,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    if (leadingIcon != null) leadingIcon()
+                    Icon(
+                        imageVector = Icons.Rounded.Search,
+                        contentDescription = stringResource(
+                            id = R.string.search_for_a_movie_or_tv_series
+                        ),
+                        tint = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.3f),
+                        modifier = Modifier
+                            .padding(horizontal = 8.dp)
+                    )
                     Box(Modifier.weight(1f)) {
-                        if (text.isEmpty()) Text(
-                            placeholderText,
-                            style = LocalTextStyle.current.copy(
-                                color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.3f),
-                                fontFamily = font,
-                                fontSize = 17.sp
+                        if (text.isEmpty()) {
+                            Text(
+                                text = stringResource(R.string.search_for_a_movie_or_tv_series),
+                                style = LocalTextStyle.current.copy(
+                                    color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.3f),
+                                    fontFamily = font,
+                                    fontSize = 17.sp
+                                )
                             )
-                        )
+                        }
                         innerTextField()
                     }
                     if (text.isNotEmpty()) {
                         Icon(
-                            Icons.Rounded.Close,
+                            imageVector = Icons.Rounded.Close,
                             null,
                             tint = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.6f),
                             modifier = Modifier
@@ -195,7 +204,7 @@ fun NonFocusedSearchBar(
                 }
             }
         }
-        
+
         Spacer(modifier = Modifier.width(8.dp))
 
         Box(
