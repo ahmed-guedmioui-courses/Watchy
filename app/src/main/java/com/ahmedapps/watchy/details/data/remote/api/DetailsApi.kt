@@ -16,6 +16,13 @@ interface DetailsApi {
         @Query("api_key") apiKey: String
     ): DetailsDto?
 
+    @GET("{type}/{id}/videos")
+    suspend fun getVideosList(
+        @Path("type") type: String,
+        @Path("id") id: Int,
+        @Query("api_key") apiKey: String
+    ): VideosList?
+
     @GET("{type}/{id}/similar")
     suspend fun getSimilarMediaList(
         @Path("type") type: String,
@@ -23,12 +30,5 @@ interface DetailsApi {
         @Query("page") page: Int,
         @Query("api_key") apiKey: String
     ): MediaListDto?
-
-    @GET("{type}/{id}/videos")
-    suspend fun getVideosList(
-        @Path("type") type: String,
-        @Path("id") id: Int,
-        @Query("api_key") apiKey: String
-    ): VideosList?
 
 }

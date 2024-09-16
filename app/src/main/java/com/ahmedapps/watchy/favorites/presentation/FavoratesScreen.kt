@@ -44,7 +44,6 @@ import com.ahmedapps.watchy.main.presentation.main.MainUiState
 import com.ahmedapps.watchy.ui.theme.MediumRadius
 import com.ahmedapps.watchy.ui.theme.font
 import com.ahmedapps.watchy.ui.ui_shared_components.AutoSwipeSection
-import com.ahmedapps.watchy.ui.ui_shared_components.shimmerEffect
 import com.ahmedapps.watchy.util.Route
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -170,7 +169,7 @@ fun FavoritesScreen(
                                 bottom = 12.dp
                             )
                             .clip(RoundedCornerShape(MediumRadius))
-                            .shimmerEffect(false)
+                            .background(MaterialTheme.colorScheme.inverseOnSurface)
                             .align(Alignment.CenterHorizontally)
                     )
                 } else {
@@ -204,7 +203,7 @@ fun FavoritesScreen(
                                 bottom = 12.dp
                             )
                             .clip(RoundedCornerShape(MediumRadius))
-                            .shimmerEffect(false)
+                            .background(MaterialTheme.colorScheme.inverseOnSurface)
                             .align(Alignment.CenterHorizontally)
                     )
                 } else {

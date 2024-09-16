@@ -46,24 +46,20 @@ import coil.compose.AsyncImagePainter
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import coil.size.Size
-import com.ahmedapps.watchy.categories.presentaion.CategoriesUiState
-import com.ahmedapps.watchy.favorites.presentation.FavoritesScreenState
 import com.ahmedapps.watchy.main.data.remote.api.MediaApi
 import com.ahmedapps.watchy.main.domain.models.Media
-import com.ahmedapps.watchy.util.genresProvider
+import com.ahmedapps.watchy.main.domain.usecase.genreListToString
 import com.ahmedapps.watchy.ui.theme.Radius
 import com.ahmedapps.watchy.ui.theme.RadiusContainer
 import com.ahmedapps.watchy.ui.theme.font
-import com.ahmedapps.watchy.util.APIConstants
-import com.ahmedapps.watchy.util.Route
 import com.ahmedapps.watchy.ui.ui_shared_components.RatingBar
 import com.ahmedapps.watchy.ui.ui_shared_components.getAverageColor
+import com.ahmedapps.watchy.util.Route
 
 @Composable
 fun CategoryMediaItem(
     media: Media,
     mainNavController: NavController,
-    categoriesUiState: CategoriesUiState,
     modifier: Modifier = Modifier
 ) {
 
@@ -121,12 +117,10 @@ fun CategoryMediaItem(
                 if (imageState is AsyncImagePainter.State.Success) {
 
                     val imageBitmap = imageState.result.drawable.toBitmap()
-
-
                     dominantColor = getAverageColor(imageBitmap.asImageBitmap())
 
                     Image(
-                        bitmap = imageBitmap.asImageBitmap(),
+                        painter = imageState.painter,
                         contentDescription = title,
                         contentScale = ContentScale.Crop,
                         modifier = Modifier
@@ -192,11 +186,8 @@ fun CategoryMediaItem(
             )
             var genres = ""
             LaunchedEffect(key1 = true) {
-                genres = genresProvider(
-                    genreIds = media.genreIds,
-                    allGenres = if (media.mediaType == APIConstants.MOVIE)
-                        categoriesUiState.moviesGenresList
-                    else categoriesUiState.tvGenresList
+                genres = genreListToString(
+                    genresNames = media.genres
                 )
             }
 

@@ -66,9 +66,8 @@ fun MediaItemImage(
     ) {
 
         if (imageState is AsyncImagePainter.State.Success) {
-            val imageBitmap = imageState.result.drawable.toBitmap()
             Image(
-                bitmap = imageBitmap.asImageBitmap(),
+                painter = imageState.painter,
                 contentDescription = media.title,
                 contentScale = ContentScale.Crop,
                 modifier = Modifier.fillMaxSize()

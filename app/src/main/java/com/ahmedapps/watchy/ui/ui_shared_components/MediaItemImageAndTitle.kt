@@ -48,13 +48,12 @@ import coil.request.ImageRequest
 import coil.size.Size
 import com.ahmedapps.watchy.main.data.remote.api.MediaApi.Companion.IMAGE_BASE_URL
 import com.ahmedapps.watchy.main.domain.models.Media
+import com.ahmedapps.watchy.main.domain.usecase.genreListToString
 import com.ahmedapps.watchy.main.presentation.main.MainUiState
 import com.ahmedapps.watchy.ui.theme.Radius
 import com.ahmedapps.watchy.ui.theme.RadiusContainer
 import com.ahmedapps.watchy.ui.theme.font
-import com.ahmedapps.watchy.util.APIConstants
 import com.ahmedapps.watchy.util.Route
-import com.ahmedapps.watchy.util.genresProvider
 
 @Composable
 fun MediaItemImageAndTitle(
@@ -118,12 +117,10 @@ fun MediaItemImageAndTitle(
                 if (imageState is AsyncImagePainter.State.Success) {
 
                     val imageBitmap = imageState.result.drawable.toBitmap()
-
-
                     dominantColor = getAverageColor(imageBitmap.asImageBitmap())
 
                     Image(
-                        bitmap = imageBitmap.asImageBitmap(),
+                        painter = imageState.painter,
                         contentDescription = title,
                         contentScale = ContentScale.Crop,
                         modifier = Modifier
@@ -188,14 +185,13 @@ fun MediaItemImageAndTitle(
                 },
             )
 
-            var genres = ""
-            LaunchedEffect(key1 = true) {
-                genresProvider(
-                    genreIds = media.genreIds,
-                    allGenres = if (media.mediaType == APIConstants.MOVIE)
-                        mainUiState.moviesGenresList
-                    else mainUiState.tvGenresList
-                )
+            var genres by remember {
+                mutableStateOf("")
+            }
+            LaunchedEffect(media) {
+               genres = genreListToString(
+                   genresNames = media.genres
+               )
             }
 
             Text(

@@ -19,10 +19,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -60,15 +63,13 @@ fun CategoryItemImage(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .padding(horizontal = 16.dp)
             .clip(RoundedCornerShape(Radius.dp))
             .background(MaterialTheme.colorScheme.surfaceVariant)
     ) {
 
         if (imageState is AsyncImagePainter.State.Success) {
-            val imageBitmap = imageState.result.drawable.toBitmap()
             Image(
-                bitmap = imageBitmap.asImageBitmap(),
+                painter = imageState.painter,
                 contentDescription = media.title,
                 contentScale = ContentScale.Crop,
                 modifier = Modifier.fillMaxSize()
@@ -99,11 +100,36 @@ fun CategoryItemImage(
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.2f))
+                .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.3f))
                 .clickable {
                     categoriesNavController.navigate(route)
                 }
         )
+
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(horizontal = 16.dp)
+                .clip(RoundedCornerShape(Radius.dp))
+        ) {
+            val offset = Offset(5.0f, 10.0f)
+            Text(
+                modifier = Modifier
+                    .align(Alignment.Center),
+                text = title,
+                color = Color.White,
+                fontFamily = font,
+                fontSize = 23.sp,
+                fontWeight = FontWeight.Bold,
+                fontStyle = FontStyle.Italic,
+                softWrap = true,
+                style = TextStyle(
+                    shadow = Shadow(
+                        color = Color.Black, offset = offset, blurRadius = 3f
+                    )
+                )
+            )
+        }
     }
 }
 

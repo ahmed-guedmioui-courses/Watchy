@@ -4,11 +4,13 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
@@ -17,6 +19,7 @@ import androidx.compose.foundation.text.selection.TextSelectionColors
 import androidx.compose.material.Icon
 import androidx.compose.material.LocalTextStyle
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Bookmarks
 import androidx.compose.material.icons.rounded.Close
 import androidx.compose.material.icons.rounded.Search
 import androidx.compose.material3.MaterialTheme
@@ -49,14 +52,16 @@ import com.ahmedapps.watchy.util.Route
 @Composable
 fun SearchBar(
     modifier: Modifier = Modifier,
-    leadingIcon: (@Composable () -> Unit)? = null,
-    placeholderText: String = "Placeholder",
     searchScreenState: SearchScreenState,
     onSearch: (String) -> Unit = {}
 ) {
-    var text by rememberSaveable { mutableStateOf(searchScreenState.searchQuery) }
+    var text by rememberSaveable {
+        mutableStateOf(searchScreenState.searchQuery)
+    }
 
-    val focusRequester = remember { FocusRequester() }
+    val focusRequester = remember {
+        FocusRequester()
+    }
     LaunchedEffect(focusRequester) {
         focusRequester.requestFocus()
     }
@@ -70,10 +75,7 @@ fun SearchBar(
         BasicTextField(
             modifier = modifier
                 .clip(RoundedCornerShape(percent = 50))
-                .background(
-                    MaterialTheme.colorScheme.secondaryContainer,
-                    MaterialTheme.shapes.small,
-                )
+                .background(MaterialTheme.colorScheme.secondaryContainer)
                 .fillMaxWidth()
                 .focusRequester(focusRequester),
             value = text,
@@ -90,24 +92,34 @@ fun SearchBar(
             ),
             decorationBox = { innerTextField ->
                 Row(
-                    modifier,
+                    modifier = modifier,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    if (leadingIcon != null) leadingIcon()
+                    Icon(
+                        imageVector = Icons.Rounded.Search,
+                        contentDescription = stringResource(
+                            id = R.string.search_for_a_movie_or_tv_series
+                        ),
+                        tint = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.3f),
+                        modifier = Modifier
+                            .padding(horizontal = 8.dp)
+                    )
                     Box(Modifier.weight(1f)) {
-                        if (text.isEmpty()) Text(
-                            placeholderText,
-                            style = LocalTextStyle.current.copy(
-                                color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.3f),
-                                fontFamily = font,
-                                fontSize = 17.sp
+                        if (text.isEmpty()) {
+                            Text(
+                                text = stringResource(R.string.search_for_a_movie_or_tv_series),
+                                style = LocalTextStyle.current.copy(
+                                    color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.3f),
+                                    fontFamily = font,
+                                    fontSize = 17.sp
+                                )
                             )
-                        )
+                        }
                         innerTextField()
                     }
                     if (text.isNotEmpty()) {
                         Icon(
-                            Icons.Rounded.Close,
+                            imageVector = Icons.Rounded.Close,
                             null,
                             tint = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.6f),
                             modifier = Modifier
@@ -136,57 +148,81 @@ fun NonFocusedSearchBar(
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .height(50.dp)
-            .clip(RoundedCornerShape(percent = 50))
-            .background(MaterialTheme.colorScheme.secondaryContainer)
-            .clickable {
-                mainNavController.navigate(Route.SEARCH_SCREEN)
-            }
-            .padding(start = 16.dp, end = 7.dp),
-        verticalAlignment = Alignment.CenterVertically
     ) {
-        Icon(
-            imageVector = Icons.Rounded.Search,
-            contentDescription = stringResource(id = R.string.search_for_a_movie_or_tv_series),
-            tint = MaterialTheme.colorScheme.onBackground,
+        Row(
             modifier = Modifier
-                .size(23.dp)
-                .alpha(0.5f)
-        )
-
-        Text(
-            modifier = Modifier
-                .padding(start = 8.dp)
                 .weight(1f)
-                .alpha(0.5f),
-            color = MaterialTheme.colorScheme.onBackground,
-            fontFamily = font,
-            fontSize = 16.sp,
-            text = stringResource(R.string.search_for_a_movie_or_tv_series)
-        )
-
-        if (isMainScreen) {
-            Box(
+                .height(50.dp)
+                .clip(RoundedCornerShape(percent = 50))
+                .background(MaterialTheme.colorScheme.secondaryContainer)
+                .clickable {
+                    mainNavController.navigate(Route.SEARCH_SCREEN)
+                }
+                .padding(start = 16.dp, end = 7.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Icon(
+                imageVector = Icons.Rounded.Search,
+                contentDescription = stringResource(id = R.string.search_for_a_movie_or_tv_series),
+                tint = MaterialTheme.colorScheme.onBackground,
                 modifier = Modifier
-                    .size(38.dp)
-                    .clip(CircleShape)
-                    .fillMaxHeight()
-                    .alpha(0.8f)
-                    .background(MaterialTheme.colorScheme.primary)
-                    .clickable {
-                        mainNavController.navigate(Route.PROFILE_SCREEN)
-                    }
-            ) {
-                Text(
+                    .size(23.dp)
+                    .alpha(0.5f)
+            )
+
+            Text(
+                modifier = Modifier
+                    .padding(start = 8.dp)
+                    .weight(1f)
+                    .alpha(0.5f),
+                color = MaterialTheme.colorScheme.onBackground,
+                fontFamily = font,
+                fontSize = 16.sp,
+                text = stringResource(R.string.search_for_a_movie_or_tv_series)
+            )
+
+            if (isMainScreen) {
+                Box(
                     modifier = Modifier
-                        .align(Alignment.Center),
-                    text = name,
-                    fontSize = 19.sp,
-                    fontFamily = font,
-                    color = MaterialTheme.colorScheme.onPrimary
-                )
+                        .size(38.dp)
+                        .clip(CircleShape)
+                        .fillMaxHeight()
+                        .alpha(0.8f)
+                        .background(MaterialTheme.colorScheme.primary)
+                        .clickable {
+                            mainNavController.navigate(Route.PROFILE_SCREEN)
+                        }
+                ) {
+                    Text(
+                        modifier = Modifier
+                            .align(Alignment.Center),
+                        text = name,
+                        fontSize = 19.sp,
+                        fontFamily = font,
+                        color = MaterialTheme.colorScheme.onPrimary
+                    )
+                }
             }
         }
-    }
 
+        Spacer(modifier = Modifier.width(8.dp))
+
+        Box(
+            modifier = Modifier
+                .size(47.dp)
+                .clip(CircleShape)
+                .background(MaterialTheme.colorScheme.secondaryContainer)
+                .clickable {
+                    mainNavController.navigate(Route.CORE_FAVORITES_SCREEN)
+                }
+        ) {
+            androidx.compose.material3.Icon(
+                modifier = Modifier
+                    .align(Alignment.Center),
+                imageVector = Icons.Rounded.Bookmarks,
+                contentDescription = stringResource(R.string.favorites_and_bookmarks),
+                tint = MaterialTheme.colorScheme.primary
+            )
+        }
+    }
 }

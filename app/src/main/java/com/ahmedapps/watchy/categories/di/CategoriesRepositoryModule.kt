@@ -11,7 +11,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 abstract class CategoriesRepositoryModule {
-
     @Binds
     @Singleton
     abstract fun bindCategoriesRepository(

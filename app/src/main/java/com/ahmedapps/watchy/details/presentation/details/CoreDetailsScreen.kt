@@ -77,13 +77,12 @@ import com.ahmedapps.watchy.details.presentation.similar.SimilarScreen
 import com.ahmedapps.watchy.details.presentation.watch_video.WatchVideoScreen
 import com.ahmedapps.watchy.main.data.remote.api.MediaApi
 import com.ahmedapps.watchy.main.domain.models.Media
+import com.ahmedapps.watchy.main.domain.usecase.genreListToString
 import com.ahmedapps.watchy.main.presentation.main.MainUiState
 import com.ahmedapps.watchy.ui.theme.SmallRadius
-import com.ahmedapps.watchy.ui.ui_shared_components.RatingBar
-import com.ahmedapps.watchy.util.genresProvider
 import com.ahmedapps.watchy.ui.theme.font
 import com.ahmedapps.watchy.ui.ui_shared_components.MediaItemImage
-import com.ahmedapps.watchy.util.APIConstants
+import com.ahmedapps.watchy.ui.ui_shared_components.RatingBar
 import com.ahmedapps.watchy.util.Route
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -92,7 +91,7 @@ import kotlinx.coroutines.launch
 fun CoreDetailScreen(
     id: Int,
     mainUiState: MainUiState,
-    mainNavController: NavController,
+    mainNavController: NavController
 ) {
 
     val detailsViewModel = hiltViewModel<DetailsViewModel>()
@@ -114,6 +113,21 @@ fun CoreDetailScreen(
         }
 
         composable(
+            "${Route.WATCH_VIDEO_SCREEN}?videoId={videoId}",
+            arguments = listOf(
+                navArgument("videoId") { type = NavType.StringType }
+            )
+        ) {
+
+            val videoId = it.arguments?.getString("videoId") ?: ""
+
+            WatchVideoScreen(
+                lifecycleOwner = LocalLifecycleOwner.current,
+                videoId = videoId
+            )
+        }
+
+        composable(
             "${Route.SIMILAR_SCREEN}?title={title}",
             arguments = listOf(
                 navArgument("title") { type = NavType.StringType },
@@ -129,20 +143,6 @@ fun CoreDetailScreen(
             )
         }
 
-        composable(
-            "${Route.WATCH_VIDEO_SCREEN}?videoId={videoId}",
-            arguments = listOf(
-                navArgument("videoId") { type = NavType.StringType }
-            )
-        ) {
-
-            val videoId = it.arguments?.getString("videoId") ?: ""
-
-            WatchVideoScreen(
-                lifecycleOwner = LocalLifecycleOwner.current,
-                videoId = videoId
-            )
-        }
     }
 
     LaunchedEffect(key1 = true) {
@@ -176,9 +176,9 @@ fun CoreDetailScreen(
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun DetailScreen(
-    detailsScreenState: DetailsScreenState,
-    detailsNavController: NavController,
     mainNavController: NavController,
+    detailsNavController: NavController,
+    detailsScreenState: DetailsScreenState,
     onEvent: (DetailsUiEvents) -> Unit
 ) {
 
@@ -265,6 +265,7 @@ fun DetailScreen(
                     detailsScreenState = detailsScreenState
                 )
 
+
                 Spacer(modifier = Modifier.height(100.dp))
 
             }
@@ -295,7 +296,7 @@ fun VideoSection(
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .height(250.dp)
+            .height(220.dp)
             .clickable {
                 onEvent(DetailsUiEvents.NavigateToWatchVideo)
             },
@@ -383,20 +384,20 @@ fun InfoSection(
     media: Media,
     detailsScreenState: DetailsScreenState,
 ) {
-    var genres = ""
-    LaunchedEffect(key1 = true) {
-        genres = genresProvider(
-            genreIds = media.genreIds,
-            allGenres = if (media.mediaType == APIConstants.MOVIE) detailsScreenState.moviesGenresList
-            else detailsScreenState.tvGenresList
+
+    var genres by remember {
+        mutableStateOf("")
+    }
+    LaunchedEffect(media) {
+        genres = genreListToString(
+            genresNames = media.genres
         )
     }
-
 
     Column(
         modifier = Modifier.padding(end = 8.dp)
     ) {
-        Spacer(modifier = Modifier.height(260.dp))
+        Spacer(modifier = Modifier.height(230.dp))
 
         Text(
             text = media.title,
@@ -422,7 +423,7 @@ fun InfoSection(
                     modifier = Modifier.padding(
                         horizontal = 4.dp
                     ),
-                    text = media.voteAverage.toString().take(3),
+                    text = media.voteAverage.div(2).toString().take(3),
                     fontFamily = font,
                     fontSize = 14.sp,
                     color = MaterialTheme.colorScheme.onSurface,
@@ -430,38 +431,36 @@ fun InfoSection(
             }
         }
 
-        Spacer(modifier = Modifier.height(6.dp))
+        Spacer(modifier = Modifier.height(7.dp))
 
-        Row(verticalAlignment = Alignment.CenterVertically) {
-
-            if (media.releaseDate.isNotEmpty()) {
-                Text(
-                    text = media.releaseDate.take(4),
+        Text(
+            modifier = Modifier
+                .border(
+                    width = 1.dp,
                     color = MaterialTheme.colorScheme.onSurface,
-                    fontFamily = font,
-                    fontSize = 15.sp
+                    shape = RoundedCornerShape(6.dp)
                 )
-                Spacer(modifier = Modifier.width(8.dp))
-            }
+                .padding(horizontal = 6.dp, vertical = 0.5.dp),
+            text = if (media.adult) stringResource(R.string._18)
+            else stringResource(R.string._12),
+            color = MaterialTheme.colorScheme.onSurface,
+            fontFamily = font,
+            fontSize = 12.sp
+        )
 
+        Spacer(modifier = Modifier.height(7.dp))
 
+        if (media.releaseDate.isNotEmpty()) {
             Text(
-                modifier = Modifier
-                    .border(
-                        width = 1.dp,
-                        color = MaterialTheme.colorScheme.onSurface,
-                        shape = RoundedCornerShape(6.dp)
-                    )
-                    .padding(horizontal = 6.dp, vertical = 0.5.dp),
-                text = if (media.adult) stringResource(R.string._18)
-                else stringResource(R.string._12),
+                text = media.releaseDate.take(4),
                 color = MaterialTheme.colorScheme.onSurface,
                 fontFamily = font,
-                fontSize = 12.sp
+                fontSize = 15.sp
             )
+            Spacer(modifier = Modifier.width(8.dp))
         }
 
-        Spacer(modifier = Modifier.height(6.dp))
+        Spacer(modifier = Modifier.height(7.dp))
 
         if (genres.isNotEmpty()) {
             Text(
@@ -472,7 +471,7 @@ fun InfoSection(
                 color = MaterialTheme.colorScheme.onSurface,
                 lineHeight = 16.sp
             )
-            Spacer(modifier = Modifier.height(6.dp))
+            Spacer(modifier = Modifier.height(7.dp))
         }
 
         if (detailsScreenState.readableTime.isNotEmpty()) {
@@ -480,7 +479,7 @@ fun InfoSection(
                 modifier = Modifier.padding(end = 8.dp),
                 text = detailsScreenState.readableTime,
                 fontFamily = font,
-                fontSize = 15.sp,
+                fontSize = 16.sp,
                 color = MaterialTheme.colorScheme.onSurface,
                 lineHeight = 16.sp
             )
@@ -532,6 +531,7 @@ fun OverviewSection(
     }
 }
 
+
 @Composable
 fun SimilarMediaSection(
     mainNavController: NavController,
@@ -541,7 +541,7 @@ fun SimilarMediaSection(
 ) {
 
     val title = stringResource(id = R.string.similar)
-    val mediaList = detailsScreenState.smallSimilarList
+    val mediaList = detailsScreenState.similarList.take(10)
 
     if (mediaList.isNotEmpty()) {
         Column {
@@ -596,6 +596,7 @@ fun SimilarMediaSection(
         }
     }
 }
+
 
 @Composable
 fun FavoritesSection(

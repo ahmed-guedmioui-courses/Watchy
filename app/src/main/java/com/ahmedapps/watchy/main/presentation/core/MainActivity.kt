@@ -192,15 +192,15 @@ class MainActivity : ComponentActivity() {
                 )
             }
 
-            composable(Route.CORE_CATEGORIES_SCREEN) {
-                CoreCategoriesScreen(
+            composable(Route.CORE_FAVORITES_SCREEN) {
+                CoreFavoriteScreen(
                     mainNavController = mainNavController,
                     mainUiState = mainUiState
                 )
             }
 
-            composable(Route.CORE_FAVORITES_SCREEN) {
-                CoreFavoriteScreen(
+            composable(Route.CORE_CATEGORIES_SCREEN) {
+                CoreCategoriesScreen(
                     mainNavController = mainNavController,
                     mainUiState = mainUiState
                 )
@@ -219,8 +219,7 @@ class MainActivity : ComponentActivity() {
 
             composable(Route.SEARCH_SCREEN) {
                 SearchScreen(
-                    mainNavController = mainNavController,
-                    mainUiState = mainUiState,
+                    mainNavController = mainNavController
                 )
             }
 
@@ -234,8 +233,8 @@ class MainActivity : ComponentActivity() {
                 val id = it.arguments?.getInt("id") ?: 0
                 CoreDetailScreen(
                     id = id,
-                    mainNavController = mainNavController,
-                    mainUiState = mainUiState
+                    mainUiState = mainUiState,
+                    mainNavController = mainNavController
                 )
             }
         }

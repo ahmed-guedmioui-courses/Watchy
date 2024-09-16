@@ -1,19 +1,14 @@
 package com.ahmedapps.watchy.categories.presentaion
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -40,14 +35,12 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.ahmedapps.watchy.R
 import com.ahmedapps.watchy.categories.presentaion.category_list.CategoryListScreen
-import com.ahmedapps.watchy.categories.presentaion.ui_components.CategoryAutoSwipeImagePager
+import com.ahmedapps.watchy.categories.presentaion.ui_components.CategoryItemImage
 import com.ahmedapps.watchy.main.domain.models.Media
 import com.ahmedapps.watchy.main.presentation.main.MainUiState
 import com.ahmedapps.watchy.ui.theme.MediumRadius
 import com.ahmedapps.watchy.ui.theme.Radius
 import com.ahmedapps.watchy.ui.theme.font
-import com.ahmedapps.watchy.ui.ui_shared_components.AutoSwipeSection
-import com.ahmedapps.watchy.ui.ui_shared_components.shimmerEffect
 import com.ahmedapps.watchy.util.Route
 
 @Composable
@@ -149,7 +142,7 @@ fun CategoriesScreen(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(top = it.calculateTopPadding()),
+                .padding(top = it.calculateTopPadding(), start = 16.dp, end = 16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
 
@@ -159,7 +152,7 @@ fun CategoriesScreen(
                 CategoryItem(
                     title = stringResource(id = R.string.action_and_adventure),
                     route = Route.ACTION_AND_ADVENTURE_CATEGORY_SCREEN,
-                    medList = categoriesUiState.actionAndAdventureList,
+                    mediaList = categoriesUiState.actionAndAdventureList,
                     categoriesNavController = categoriesNavController,
                 )
             }
@@ -170,7 +163,7 @@ fun CategoriesScreen(
                 CategoryItem(
                     title = stringResource(id = R.string.drama),
                     route = Route.DRAMA_CATEGORY_SCREEN,
-                    medList = categoriesUiState.dramaList,
+                    mediaList = categoriesUiState.dramaList,
                     categoriesNavController = categoriesNavController,
                 )
             }
@@ -181,7 +174,7 @@ fun CategoriesScreen(
                 CategoryItem(
                     title = stringResource(id = R.string.comedy),
                     route = Route.COMEDY_CATEGORY_SCREEN,
-                    medList = categoriesUiState.comedyList,
+                    mediaList = categoriesUiState.comedyList,
                     categoriesNavController = categoriesNavController,
                 )
             }
@@ -192,7 +185,7 @@ fun CategoriesScreen(
                 CategoryItem(
                     title = stringResource(id = R.string.sci_fi_and_fantasy),
                     route = Route.SCI_FI_AND_FANTASY_CATEGORY_SCREEN,
-                    medList = categoriesUiState.sciFiAndFantasyList,
+                    mediaList = categoriesUiState.sciFiAndFantasyList,
                     categoriesNavController = categoriesNavController,
                 )
             }
@@ -202,7 +195,7 @@ fun CategoriesScreen(
             Box(modifier = Modifier.weight(1f)) {
                 CategoryItem(
                     title = stringResource(id = R.string.animation),
-                    medList = categoriesUiState.animationList,
+                    mediaList = categoriesUiState.animationList,
                     route = Route.ANIMATION_CATEGORY_SCREEN,
                     categoriesNavController = categoriesNavController,
                 )
@@ -218,11 +211,11 @@ fun CategoriesScreen(
 @Composable
 fun CategoryItem(
     title: String,
-    medList: List<Media>,
+    mediaList: List<Media>,
     route: String,
     categoriesNavController: NavController
 ) {
-    if (medList.isEmpty()) {
+    if (mediaList.isEmpty()) {
         Box(
             modifier = Modifier
                 .height(220.dp)
@@ -232,7 +225,7 @@ fun CategoryItem(
                     bottom = 12.dp
                 )
                 .clip(RoundedCornerShape(MediumRadius))
-                .shimmerEffect(false)
+                .background(MaterialTheme.colorScheme.inverseOnSurface)
         ) {
             Text(
                 text = title,
@@ -245,37 +238,13 @@ fun CategoryItem(
         }
 
     } else {
-        CategoryAutoSwipeImagePager(
+
+        CategoryItemImage(
             title = title,
             route = route,
-            mediaList = medList.take(6),
+            media = mediaList[0],
             categoriesNavController = categoriesNavController,
         )
-
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(horizontal = 16.dp)
-                .clip(RoundedCornerShape(Radius.dp))
-        ) {
-            val offset = Offset(5.0f, 10.0f)
-            Text(
-                modifier = Modifier
-                    .align(Alignment.Center),
-                text = title,
-                color = Color.White,
-                fontFamily = font,
-                fontSize = 23.sp,
-                fontWeight = FontWeight.Bold,
-                fontStyle = FontStyle.Italic,
-                softWrap = true,
-                style = TextStyle(
-                    shadow = Shadow(
-                        color = Color.Black, offset = offset, blurRadius = 3f
-                    )
-                )
-            )
-        }
     }
 }
 

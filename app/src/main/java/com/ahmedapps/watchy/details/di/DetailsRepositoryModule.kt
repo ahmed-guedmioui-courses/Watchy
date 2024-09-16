@@ -22,7 +22,7 @@ abstract class DetailsRepositoryModule {
 
     @Binds
     @Singleton
-    abstract fun bindExtraDetailsRepository(
+    abstract fun bindSimilarMediaRepository(
         similarMediaRepositoryImpl: SimilarMediaRepositoryImpl
     ): SimilarMediaRepository
 

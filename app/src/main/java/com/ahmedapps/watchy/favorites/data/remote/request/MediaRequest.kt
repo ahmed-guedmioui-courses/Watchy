@@ -9,7 +9,7 @@ data class MediaRequest(
     val adult: Boolean,
     val backdropPath: String,
     val firstAirDate: String,
-    val genreIds: String,
+    val genres: String,
     var mediaType: String,
     val originCountry: String,
     val originalLanguage: String,

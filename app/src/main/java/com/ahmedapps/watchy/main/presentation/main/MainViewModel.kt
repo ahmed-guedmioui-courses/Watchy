@@ -3,8 +3,6 @@ package com.ahmedapps.watchy.main.presentation.main
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ahmedapps.watchy.main.data.remote.api.MediaApi.Companion.API_KEY
-import com.ahmedapps.watchy.main.domain.models.Media
-import com.ahmedapps.watchy.main.domain.repository.GenreRepository
 import com.ahmedapps.watchy.main.domain.repository.MainRepository
 import com.ahmedapps.watchy.profile.domain.repository.ProfileRepository
 import com.ahmedapps.watchy.util.APIConstants.ALL
@@ -24,7 +22,6 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val mainRepository: MainRepository,
-    private val genreRepository: GenreRepository,
     private val profileRepository: ProfileRepository
 ) : ViewModel() {
 
@@ -39,14 +36,6 @@ class MainViewModel @Inject constructor(
                 _mainUiState.update {
                     it.copy(isLoading = true)
                 }
-
-                loadGenres(
-                    fetchFromRemote = true, isMovies = true
-                )
-
-                loadGenres(
-                    fetchFromRemote = true, isMovies = false
-                )
 
                 when (event.route) {
 
@@ -116,69 +105,10 @@ class MainViewModel @Inject constructor(
         loadPopularTvSeries(fetchFromRemote)
         loadTrendingAll(fetchFromRemote)
 
-        loadGenres(
-            fetchFromRemote = fetchFromRemote, isMovies = true
-        )
-        loadGenres(
-            fetchFromRemote = fetchFromRemote, isMovies = false
-        )
-
         viewModelScope.launch {
             _mainUiState.update {
                 it.copy(name = profileRepository.getName())
             }
-        }
-    }
-
-    private fun loadGenres(
-        fetchFromRemote: Boolean,
-        isMovies: Boolean
-    ) {
-        viewModelScope.launch {
-
-            if (isMovies) {
-                genreRepository
-                    .getGenres(fetchFromRemote, MOVIE, API_KEY)
-                    .collect { result ->
-                        when (result) {
-                            is Resource.Success -> {
-                                result.data?.let { genresList ->
-                                    _mainUiState.update {
-                                        it.copy(
-                                            moviesGenresList = genresList
-                                        )
-                                    }
-                                }
-                            }
-
-                            is Resource.Error -> Unit
-
-                            is Resource.Loading -> Unit
-                        }
-                    }
-            } else {
-                genreRepository
-                    .getGenres(fetchFromRemote, TV, API_KEY)
-                    .collect { result ->
-                        when (result) {
-                            is Resource.Success -> {
-                                result.data?.let { genresList ->
-                                    _mainUiState.update {
-                                        it.copy(
-                                            tvGenresList = genresList
-                                        )
-                                    }
-                                }
-                            }
-
-                            is Resource.Error -> Unit
-
-                            is Resource.Loading -> Unit
-                        }
-                    }
-            }
-
-
         }
     }
 

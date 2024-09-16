@@ -52,7 +52,7 @@ fun NonFocusedTopBar(
                     if (title.isNotEmpty()) MaterialTheme.colorScheme.background
                     else Color.Transparent
                 )
-                .padding(start = 16.dp, end = if (isMainScreen) 8.dp else 16.dp),
+                .padding(horizontal = 16.dp),
             verticalArrangement = Arrangement.SpaceEvenly
         ) {
             NonFocusedSearchBar(
@@ -90,19 +90,9 @@ fun FocusedTopBar(
             .offset { IntOffset(x = 0, y = toolbarOffsetHeightPx) }
     ) {
         SearchBar(
-            leadingIcon = {
-                Icon(
-                    Icons.Rounded.Search,
-                    null,
-                    tint = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.3f),
-                    modifier = Modifier
-                        .padding(horizontal = 8.dp)
-                )
-            },
             modifier = Modifier
                 .padding(horizontal = 8.dp)
                 .height(50.dp),
-            placeholderText = stringResource(R.string.search_for_a_movie_or_tv_series),
             searchScreenState = searchScreenState
         ) {
             onSearch(it)

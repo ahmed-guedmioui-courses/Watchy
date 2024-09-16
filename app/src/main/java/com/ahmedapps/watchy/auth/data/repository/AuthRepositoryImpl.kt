@@ -6,7 +6,6 @@ import com.ahmedapps.watchy.auth.domain.model.AuthRequest
 import com.ahmedapps.watchy.auth.domain.repository.AuthRepository
 import com.ahmedapps.watchy.auth.util.AuthResult
 import com.ahmedapps.watchy.favorites.domain.repository.FavoritesRepository
-import com.ahmedapps.watchy.main.domain.repository.GenreRepository
 import com.ahmedapps.watchy.main.domain.repository.MainRepository
 import retrofit2.HttpException
 import javax.inject.Inject
@@ -15,7 +14,6 @@ class AuthRepositoryImpl @Inject constructor(
     private val authApi: AuthApi,
     private val mainRepository: MainRepository,
     private val favoritesRepository: FavoritesRepository,
-    private val genreRepository: GenreRepository,
     private val prefs: SharedPreferences
 ) : AuthRepository {
 
@@ -64,7 +62,6 @@ class AuthRepositoryImpl @Inject constructor(
 
             prefs.edit().putString("email", email).apply()
             prefs.edit().putString("name", authResponse.name).apply()
-            prefs.edit().putString("jwt_token", authResponse.token).apply()
 
             AuthResult.Authorized()
 
@@ -82,24 +79,15 @@ class AuthRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun singOut(): AuthResult<Unit> {
-        prefs.edit().putString("email", null).apply()
-        prefs.edit().putString("name", null).apply()
-        prefs.edit().putString("jwt_token", null).apply()
-
-        mainRepository.clearMediaDb()
-        genreRepository.clearGenresDb()
-        favoritesRepository.clearFavoritesDb()
-
-        return AuthResult.SingedOut()
-    }
-
     override suspend fun authenticate(): AuthResult<Unit> {
         return try {
-            val token = prefs.getString("jwt_token", null)
+
+            val email = prefs.getString("email", null)
                 ?: return AuthResult.Unauthorized()
 
-            authApi.authenticate("Bearer $token")
+            authApi.authenticate(
+                request = AuthRequest(email = email)
+            )
             AuthResult.Authorized()
 
         } catch (e: HttpException) {
@@ -115,6 +103,17 @@ class AuthRepositoryImpl @Inject constructor(
             AuthResult.Authorized()
         }
     }
+
+    override suspend fun singOut(): AuthResult<Unit> {
+        prefs.edit().putString("email", null).apply()
+        prefs.edit().putString("name", null).apply()
+
+        mainRepository.clearMediaDb()
+        favoritesRepository.clearFavoritesDb()
+
+        return AuthResult.SingedOut()
+    }
+
 }
 
 

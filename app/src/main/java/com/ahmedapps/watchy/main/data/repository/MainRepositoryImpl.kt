@@ -10,11 +10,13 @@ import com.ahmedapps.watchy.main.data.remote.api.MediaApi
 import com.ahmedapps.watchy.main.domain.models.Media
 import com.ahmedapps.watchy.main.domain.repository.MainRepository
 import com.ahmedapps.watchy.util.APIConstants
+import com.ahmedapps.watchy.util.APIConstants.GET_TAG
 import com.ahmedapps.watchy.util.APIConstants.TRENDING
 import com.ahmedapps.watchy.util.Resource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import retrofit2.HttpException
+import timber.log.Timber
 import java.io.IOException
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -38,10 +40,7 @@ class MainRepositoryImpl @Inject constructor(
     }
 
     override suspend fun insertSearchedMedia(media: Media) {
-        val doesMediaExist = (mediaDao.doesMediaExist(media.mediaId) > 0)
-        if (!doesMediaExist) {
-            mediaDao.upsertMediaItem(media.toMediaEntity())
-        }
+        mediaDao.upsertMediaItem(media.toMediaEntity())
     }
 
     override suspend fun getMediaById(id: Int): Media {

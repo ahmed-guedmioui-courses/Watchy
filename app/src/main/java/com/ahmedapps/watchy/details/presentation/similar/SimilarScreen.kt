@@ -6,6 +6,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.remember
@@ -16,13 +19,14 @@ import androidx.compose.ui.input.nestedscroll.NestedScrollSource
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.ahmedapps.watchy.R
 import com.ahmedapps.watchy.details.presentation.detail_ui_components.SimilarItem
 import com.ahmedapps.watchy.details.presentation.details.DetailsScreenState
 import com.ahmedapps.watchy.ui.theme.HugeRadius
-import com.ahmedapps.watchy.ui.ui_shared_components.ListShimmerEffect
+import com.ahmedapps.watchy.ui.theme.font
 import com.ahmedapps.watchy.ui.ui_shared_components.NonFocusedTopBar
 import kotlin.math.roundToInt
 
@@ -57,7 +61,12 @@ fun SimilarScreen(
     ) {
 
         if (mediaList.isEmpty()) {
-            ListShimmerEffect(HugeRadius)
+            Text(
+                text = title,
+                color = MaterialTheme.colorScheme.onBackground,
+                fontFamily = font,
+                fontStyle = FontStyle.Italic
+            )
         } else {
 
             val listState = rememberLazyGridState()

@@ -118,9 +118,8 @@ class DetailsViewModel @Inject constructor(
             }
 
             loadDetails(isRefresh) {
-                loadSimilarMedialList(isRefresh) {
-                    loadVideosList(isRefresh)
-                }
+                loadSimilarMedialList(isRefresh)
+                loadVideosList(isRefresh)
             }
         }
     }
@@ -176,10 +175,8 @@ class DetailsViewModel @Inject constructor(
         }
     }
 
-    private fun loadSimilarMedialList(
-        isRefresh: Boolean,
-        onLoadSimilarMedialList: () -> Unit
-    ) {
+
+    private fun loadSimilarMedialList(isRefresh: Boolean) {
 
         viewModelScope.launch {
 
@@ -197,18 +194,13 @@ class DetailsViewModel @Inject constructor(
                             result.data?.let { similarMediaList ->
                                 _detailsScreenState.update {
                                     it.copy(
-                                        similarList = similarMediaList,
-                                        smallSimilarList = similarMediaList.take(10)
+                                        similarList = similarMediaList
                                     )
                                 }
                             }
-
-                            onLoadSimilarMedialList()
                         }
 
-                        is Resource.Error -> {
-                            onLoadSimilarMedialList()
-                        }
+                        is Resource.Error -> {}
 
                         is Resource.Loading -> {
                             _detailsScreenState.update {

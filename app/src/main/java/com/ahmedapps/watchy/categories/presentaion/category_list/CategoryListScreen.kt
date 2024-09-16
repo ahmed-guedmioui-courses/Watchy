@@ -21,7 +21,6 @@ import androidx.navigation.NavController
 import com.ahmedapps.watchy.R
 import com.ahmedapps.watchy.categories.presentaion.CategoriesUiState
 import com.ahmedapps.watchy.ui.theme.HugeRadius
-import com.ahmedapps.watchy.ui.ui_shared_components.ListShimmerEffect
 import com.ahmedapps.watchy.ui.ui_shared_components.NonFocusedTopBar
 import com.ahmedapps.watchy.util.Route
 import kotlin.math.roundToInt
@@ -68,27 +67,21 @@ fun CategoryListScreen(
             .nestedScroll(nestedScrollConnection)
     ) {
 
-        if (mediaList.isEmpty()) {
-            ListShimmerEffect(HugeRadius)
-        } else {
+        val listState = rememberLazyGridState()
 
-            val listState = rememberLazyGridState()
+        LazyVerticalGrid(
+            state = listState,
+            contentPadding = PaddingValues(top = HugeRadius.dp),
+            columns = GridCells.Adaptive(190.dp),
+        ) {
 
-            LazyVerticalGrid(
-                state = listState,
-                contentPadding = PaddingValues(top = HugeRadius.dp),
-                columns = GridCells.Adaptive(190.dp),
-            ) {
-
-                items(mediaList.size) { i ->
-                    CategoryMediaItem(
-                        media = mediaList[i],
-                        mainNavController = mainNavController,
-                        categoriesUiState = categoriesUiState
-                    )
-                }
-
+            items(mediaList.size) { i ->
+                CategoryMediaItem(
+                    media = mediaList[i],
+                    mainNavController = mainNavController
+                )
             }
+
         }
 
         NonFocusedTopBar(
